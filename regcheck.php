@@ -67,6 +67,10 @@
         
         }
     }
+    $iterations=1024;
+        $salt=base64_encode(mycrypt_create_iv(PBKDF2_SALT_BYTE_SIIZE,MCRYPT_DEV_URANDOM));
+        $psw_hash=hash_pbkdf2("sha256",$password,$salt,$iterations,20);
+        $sql= "INSERT INTO user(username,password) values ('$username',$psw_hash')";//input hash_password  
     else
     {
         echo "<script>alert('提交未成功！'); history.go(-1);</script>";
